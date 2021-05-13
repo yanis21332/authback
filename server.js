@@ -3,7 +3,7 @@ const app = express();
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 
-let ShemaAccount = require("./shema/Account.shema");
+const stuffRoutes = require("./routes/user")
 //connect to mongodb
 
 mongoose.connect("mongodb+srv://YanisKerrouche:Yanis.com123@cluster0.ag5tc.mongodb.net/authApp",{useNewUrlParser: true, useUnifiedTopology: true})
@@ -23,20 +23,8 @@ app.use((req,res,next)=>{
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
     next();
 })
-app.post("/api/newAccount",(req,res,next)=>{
-    let newUser = new ShemaAccount({
-        email: req.body.email,
-        password: req.body.password
-    })
-    newUser.save()
-    .then(()=>{
-        res.status(201).json({message: "utilisateur crée"});
-        console.log("un nouveau utilisateur a été crée");
-    })
-    .catch(err=>{
-        res.status(500).json(err)
-    })
-})
+
+app.use("/api/auth",stuffRoutes)
 app.get("/",(req,res)=>{
     res.send("tu es dans le bon url")
 })
