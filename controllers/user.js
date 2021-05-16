@@ -12,9 +12,9 @@ exports.signup = (req,res,next)=>{
                 })
                 newUser.save()
                 .then(user=>{
-                    res.status(201).json({message: "utilisateur crée",user:user});
+                    res.status(201)
                     console.log("un nouveau utilisateur a été crée");
-                    console.log(user);
+                    console.log(user);        
                 })
                 .catch(err=>{
                     res.status(500).json(err)
@@ -38,14 +38,17 @@ exports.login = (req,res,next)=>{
         bcrypt.compare(req.body.password,user.password)
         .then(valid=>{
             if(!valid){
-                return res.status(404).json({message:"mot de passe incorrect"})
+                res.status(404);
+                res.redirect("http://localhost:3000/errorPage")
+                
             }
-            console.log("les identifiant sont correct")
-            res.status(200).json({
-                token: "TOKEN",
-                userID: user._id
-            })
-            res.send("les identifiant sont juste")
+            else{
+                console.log("les identifiant sont correct")
+                res.status(200).json({
+                    token: "TOKEN",
+                    userID: user._id
+                })
+            }
         })
         .catch(err=>{
             res.status(500).json(err)
