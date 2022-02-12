@@ -29,7 +29,7 @@ app.use((req,res,next)=>{
 
 app.use("/",stuffRoutes)
 //luanching server
-server.listen(4000, err => {
+server.listen(4000||8080, err => {
     if (!err) {
         console.log(`lancement du serveur sur le port 4000`)
     } else {
