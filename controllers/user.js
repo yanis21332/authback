@@ -72,8 +72,9 @@ exports.login = (req,res)=>{
             }
             else{
                 console.log("les identifiant sont correct")
+		console.log("on appelle create token et voici la clé secrete 2:  " + process.env.JWT_TOKEN_SECRET_KEY)
                 let token = createToken(user._id)
-                
+
                 return res.status(200).json({
                     userID: token
                 })
