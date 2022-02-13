@@ -63,6 +63,7 @@ exports.login = (req,res)=>{
             return res.status(200).json({error:"utilisateur non trouvé"})
         }
         bcrypt.compare(req.body.password,user.password).then(valid=>{
+	    console.log("on va verifier si le mot de passe est valide !!");
             if(!valid){
                 console.error("le mot de passe est certainement incorrect")
                 return res.status(200).json({error:"le mot de passe que vous avez saissi est incorrect"});
@@ -72,7 +73,6 @@ exports.login = (req,res)=>{
                 let token = createToken(user._id)
                 
                 return res.status(200).json({
-                    token: "TOKEN",
                     userID: token
                 })
             }
