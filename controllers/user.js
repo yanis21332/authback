@@ -3,17 +3,19 @@ const bcrypt = require("bcrypt");
 const ObjectId = require("mongoose").Types.ObjectId;
 const jwt = require("jsonwebtoken");
 require("dotenv").config({
-    path: `${__dirname}/config/.env`
+    path: "./config/.env"
 })
 
 let maxAge = 1000 * 60 * 60 * 24 * 3
 const createToken = id => {
+    console.log("on appelle create token et voici la clé secrete:  " + process.env.JWT_TOKEN_SECRET_KEY)
     return jwt.sign({
         id
     }, process.env.JWT_TOKEN_SECRET_KEY, {
         expiresIn: maxAge
     })
 }
+
 
 
 exports.signup = (req,res)=>{
