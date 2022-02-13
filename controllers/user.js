@@ -71,8 +71,9 @@ exports.login = (req,res)=>{
                 return res.status(200).json({error:"le mot de passe que vous avez saissi est incorrect"});
             }
             else{
-                console.log("les identifiant sont correct")
-		console.log("on appelle create token et voici la clé secrete 2:  " + process.env.JWT_TOKEN_SECRET_KEY)
+                console.log("les identifiant sont correct");
+		console.log("simple verifications");
+		console.log("on appelle create token et voici la clé secrete 2:  " + process.env.JWT_TOKEN_SECRET_KEY);
                 let token = createToken(user._id)
 
                 return res.status(200).json({
